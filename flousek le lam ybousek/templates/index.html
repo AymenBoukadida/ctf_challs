@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>SecurinetsEPS Blog</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Amazing News!</h1>
+   <div class="articles">
+       <div class="article">
+           <h2>SecurinetsEPS Best Club in Tunisia?</h2>
+           <p>Lately it seems like SecurinetsEPS has been voted as the best club in Tunisia, Making it officially 
+            a finalist to the title of the world's best club.</p>
+           <img src="{{ url_for('static', filename='images/secuinets.jpg') }}" alt="securinets" class="article-image">
+       </div>
+       <div class="article">
+           <h2>What's next?</h2>
+           <p>Well we don't know but all we know is that IEEE ain't got nothing on us, and also all SecurinetsEPS members
+            will be getting a compensation on 5 Million $.
+           </p>
+           <img src="{{ url_for('static', filename='images/woah.jpg') }}" alt="WOAH" class="article-image">
+       </div>
+       <div class="article">
+           <h2>This Ctf's Flag</h2>
+           <p>if you haven't found the flag yet, too bad LMAO </p>
+           <img src="{{ url_for('static', filename='images/gitgut.jpg') }}" alt="LMAO" class="article-image">
+
+       </div>
+   </div>
+    <div class="overlay"></div>
+   <div class="popup">
+       <h2>Premium Content</h2>
+       <p>Please subscribe to view this content!</p>
+       <button id="pay-button" onclick="window.location.href='//www.youtube.com/watch?v=dQw4w9WgXcQ'">ije 5alles</button>
+   </div>
+    <script>
+        /* nothing to see here keep your nose out of it */
+       const observer = new MutationObserver((mutations) => {
+           if (!document.querySelector('.overlay')) {
+               fetch('/flag', {
+                   headers: {
+                       'X-Requested-With': 'XMLHttpRequest'
+                   }
+               })
+               .then(response => response.text())
+               .then(data => {
+                   const flagContainer = document.createElement('div');
+                   flagContainer.innerText = data;
+                   document.querySelector('.article:nth-child(2)').appendChild(flagContainer);
+               })
+               .catch(error => console.error('Error:', error));
+               
+               observer.disconnect();
+           }
+       });
+       /* lmao as if you will understand this */
+       observer.observe(document.body, {
+           childList: true,
+           subtree: true
+       });
+   </script>
+</body>
+</html>
